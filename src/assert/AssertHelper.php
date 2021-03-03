@@ -69,6 +69,42 @@ class AssertHelper
         });
     }
 
+    public function great(int $value,$msg = '')
+    {
+        return $this->validatefunc(function() use ($value,$msg)
+        {
+            if($this->value > $value)
+            {
+                $this->isbool = false;
+                $this->msg = $msg ?? '值大于'.$value;
+            }
+        });
+    }
+
+    public function equal(int $value,$msg = '')
+    {
+        return $this->validatefunc(function() use ($value,$msg)
+        {
+            if($this->value !== $value)
+            {
+                $this->isbool = false;
+                $this->msg = $msg ?? '值等于'.$value;
+            }
+        });
+    }
+
+    public function less(int $value,$msg = '')
+    {
+        return $this->validatefunc(function() use ($value,$msg)
+        {
+            if($this->value < $value)
+            {
+                $this->isbool = false;
+                $this->msg = $msg ?? '值小于'.$value;
+            }
+        });
+    }
+
     public function mobile(?string $msg = null)
     {
         return $this->validatefunc(function() use ($msg){
